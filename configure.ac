@@ -29,6 +29,8 @@ AC_INIT([sample],[0.5])
 
 TEA_INIT()
 
+TEA_INIT_CXX
+
 AC_CONFIG_AUX_DIR(tclconfig)
 
 #--------------------------------------------------------------------

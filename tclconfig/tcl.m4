@@ -3093,8 +3093,8 @@ AS_VAR_POPDEF([CACHEVAR])dnl
 ])dnl AX_CHECK_LINK_FLAGS
 
 # use AX_CHECK_LINK_FLAG to add a linker flag if it is available
-AC_DEFUN([AX_ADDTO_LINK_FLAG],
-[AX_CHECK_LINK_FLAGS([$1], [LDFLAGS="$LDFLAGS $1"], [])
+AC_DEFUN([AX_ADDTO_LINK_FLAGS],
+[AX_CHECK_LINK_FLAG([$1], [LDFLAGS="$LDFLAGS $1"], [])
 ])
 
 #------------------------------------------------------------------------
