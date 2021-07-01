@@ -1166,7 +1166,7 @@ AC_DEFUN([TEA_CONFIG_CFLAGS], [
     else
 	CCLD=$CC
     fi
-
+    AC_SUBST(CCLD)
 
     case $system in
 	# TEA specific:
@@ -3025,6 +3025,8 @@ AC_DEFUN([TEA_ADD_SWIGINTERFACE], [
 	# check for SWIG
 	AC_CHECK_PROG(SWIG_CHECK,swig,yes)
 	AS_IF([test x"$SWIG_CHECK" != x"yes"], [AC_MSG_ERROR([Swig is requred to compile this.])])
+	SWIG="swig"
+	
 	# check for existence - allows for generic/win/unix VPATH
 	# To add more dirs here (like 'src'), you have to update VPATH
 	# in Makefile.in as well
@@ -3050,12 +3052,14 @@ AC_DEFUN([TEA_ADD_SWIGINTERFACE], [
 	fi
 	PKG_OBJECTS="$PKG_OBJECTS $SWIGOBJECT"
 	SWIG_WRAP="wrap"
+	TEA_ADD_CLEANFILES([$SWIGOUTPUT])
     AC_SUBST(PKG_SOURCES)
     AC_SUBST(PKG_OBJECTS)
     AC_SUBST(SWIGOBJECT)
     AC_SUBST(SWIGOUTPUT)
     AC_SUBST(SWIGINTERFACE)
     AC_SUBST(SWIG_WRAP)
+    AC_SUBST(SWIG)
 ])
 
 #------------------------------------------------------------------------

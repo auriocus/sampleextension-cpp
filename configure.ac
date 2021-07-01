@@ -73,8 +73,8 @@ TEA_SETUP_COMPILER
 # and PKG_TCL_SOURCES.
 #-----------------------------------------------------------------------
 
-TEA_ADD_SOURCES([cppsample.cpp])
-TEA_ADD_SWIGINTERFACE([cppsample.hpp])
+TEA_ADD_SOURCES([sample.cpp])
+TEA_ADD_SWIGINTERFACE([sample.hpp])
 TEA_ADD_HEADERS([])
 TEA_ADD_INCLUDES([])
 TEA_ADD_LIBS([])
