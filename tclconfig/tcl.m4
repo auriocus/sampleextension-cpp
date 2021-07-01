@@ -2762,6 +2762,7 @@ The PACKAGE_NAME variable must be defined by your TEA configure.ac])
     AC_SUBST(PKG_INCLUDES)
     AC_SUBST(PKG_LIBS)
     AC_SUBST(PKG_CFLAGS)
+    AC_SUBST(SWIG_WRAP)
 
     # Configure the installer.
     TEA_INSTALLER
@@ -3048,11 +3049,13 @@ AC_DEFUN([TEA_ADD_SWIGINTERFACE], [
 	    SWIGOBJECT="${SWIGBASE}.\${OBJEXT}"
 	fi
 	PKG_OBJECTS="$PKG_OBJECTS $SWIGOBJECT"
+	SWIG_WRAP="wrap"
     AC_SUBST(PKG_SOURCES)
     AC_SUBST(PKG_OBJECTS)
     AC_SUBST(SWIGOBJECT)
     AC_SUBST(SWIGOUTPUT)
     AC_SUBST(SWIGINTERFACE)
+    AC_SUBST(SWIG_WRAP)
 ])
 
 #------------------------------------------------------------------------

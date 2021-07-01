@@ -121,6 +121,14 @@ TCL_SRC_DIR	= @TCL_SRC_DIR@
 # Not used, but retained for reference of what libs Tcl required
 #TCL_LIBS	= @TCL_LIBS@
 
+
+# Variables for generating wrappers using SWIG
+SWIG		= @SWIG@
+SWIGOUTPUT	= @SWIGOUTPUT@
+SWIGINTERFACE	= @SWIGINTERFACE@
+SWIGOBJECT	= @SWIGOBJECT@
+
+
 #========================================================================
 # TCLLIBPATH seeds the auto_path in Tcl's init.tcl so we can test our
 # package without installing.  The other environment variables allow us
@@ -190,7 +198,13 @@ VALGRINDARGS	= --tool=memcheck --num-callers=8 --leak-resolution=high \
 # for the BINARIES that you specified above have already been done.
 #========================================================================
 
-all: binaries libraries doc
+all: @@SWIG_WRAP@@ binaries libraries
+
+
+wrap: $(SWIGOUTPUT)
+
+$(SWIGOUTPUT): $(SWIGINTERFACE)
+	$(SWIG) -tcl -c++ -namespace $(PACKAGE_NAME) -o $(SWIGOUTPUT) $(SWIGINTERFACE)
 
 #========================================================================
 # The binaries target builds executable programs, Windows .dll's, unix
@@ -453,7 +467,7 @@ uninstall-binaries:
 	  rm -f "$(DESTDIR)$(bindir)/$$p"; \
 	done
 
-.PHONY: all binaries clean depend distclean doc install libraries test
+.PHONY: all binaries clean depend distclean doc install libraries test wrap
 .PHONY: gdb gdb-test valgrind valgrindshell
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
