@@ -3027,6 +3027,10 @@ AC_DEFUN([TEA_ADD_SWIGINTERFACE], [
 	AC_CHECK_PROG(SWIG_CHECK,swig,yes)
 	AS_IF([test x"$SWIG_CHECK" != x"yes"], [AC_MSG_ERROR([Swig is requred to compile this.])])
 	SWIG="swig"
+
+        if test "x$TEA_CXX" != "x"; then 
+            SWIG="$SWIG -c++"
+        fi
 	
 	# check for existence - allows for generic/win/unix VPATH
 	# To add more dirs here (like 'src'), you have to update VPATH
@@ -3044,7 +3048,13 @@ AC_DEFUN([TEA_ADD_SWIGINTERFACE], [
 	PKG_SOURCES="$PKG_SOURCES $1"
 	# this assumes it is in a VPATH dir
 	SWIGBASE=${PACKAGE_NAME}_wrap
-	SWIGOUTPUT=${srcdir}/generic/${SWIGBASE}.cpp
+	SWIGOUTPUT="${srcdir}/generic/${SWIGBASE}"
+        if test "x$TEA_CXX" != "x"; then 
+            SWIGOUTPUT="${SWIGOUTPUT}.cpp"
+        else 
+            SWIGOUTPUT="${SWIGOUTPUT}.c"
+        fi
+        
 	# handle user calling this before or after TEA_SETUP_COMPILER
 	if test x"${OBJEXT}" != x ; then
 	    SWIGOBJECT="${SWIGBASE}.${OBJEXT}"
